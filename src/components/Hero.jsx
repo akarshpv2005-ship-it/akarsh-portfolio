@@ -1,8 +1,34 @@
-
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, BriefcaseBusiness, CodeXml } from "lucide-react";
 
 function Hero() {
+  const words = ["AI / ML ENGINEER", "WEB DEVELOPER", "DATA SCIENTIST", "PYTHON DEVELOPER"];
+  const [text, setText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[wordIndex];
+    let speed = isDeleting ? 50 : 100;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setText(currentWord.substring(0, text.length + 1));
+        if (text.length + 1 === currentWord.length) {
+          setTimeout(() => setIsDeleting(true), 1500);
+        }
+      } else {
+        setText(currentWord.substring(0, text.length - 1));
+        if (text.length === 0) {
+          setIsDeleting(false);
+          setWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }
+    }, speed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex]);
+
   return (
     <section className="hero" id="home">
 
@@ -23,7 +49,7 @@ function Hero() {
         </h1>
 
         <h2>
-          AI / ML ENGINEER
+          {text}<span className="typing-cursor">|</span>
         </h2>
 
         <p className="hero-description">
@@ -42,12 +68,12 @@ function Hero() {
             Contact Me
           </a>
           <a
-  href="/resume/Akarsh_PV_Resume.pdf"
-  download
-  className="secondary-btn"
->
-  Download Resume
-</a>
+            href="/resume/Akarsh_PV_Resume.pdf"
+            download
+            className="secondary-btn"
+          >
+            Download Resume
+          </a>
         </div>
 
         <div className="hero-socials">

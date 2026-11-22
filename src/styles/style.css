@@ -1558,3 +1558,12 @@ body {
     transition-duration: 0.01ms;
   }
 }
+.typing-cursor {
+  animation: blink 0.8s infinite;
+  color: #ccff00;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
