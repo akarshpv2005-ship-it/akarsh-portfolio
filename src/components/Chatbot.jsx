@@ -17,44 +17,50 @@ const profile = {
 
 const projects = [
   {
-    name: "DisasterGuard AI",
-    description:
-      "An intelligent disaster monitoring platform designed to track six major hazards using public data sources and geospatial intelligence.",
-    tags: ["Python", "Machine Learning", "Geospatial"],
-    github: "",
-  },
-  {
-    name: "SolarPredict AI",
-    description:
-      "A solar power prediction application using an XGBoost machine learning model with a Flask-based web interface.",
-    tags: ["Python", "XGBoost", "Flask"],
-    github: "",
-  },
-  {
     name: "NEXUS CRM",
+    aliases: ["nexus", "crm"],
     description:
       "A customer relationship management platform with ticket management, messaging and team workflows.",
     tags: ["React", "Flask", "Supabase"],
     github: "https://github.com/akarshpv2005-ship-it/NEXUS-CRM",
   },
   {
-    name: "Code Auto Reviewer",
+    name: "Emotion-Based Movie Recommendation",
+    aliases: ["emotion", "movie", "flick"],
+    description:
+      "A Django web app with real-time facial emotion detection that maps seven emotions to movie categories, with user authentication and an admin dashboard.",
+    tags: ["Django", "OpenCV", "TensorFlow", "Keras"],
+    github: "https://github.com/akarshpv2005-ship-it/FLICK-PICKS",
+  },
+  {
+    name: "DisasterGuard AI",
+    aliases: ["disaster", "hazard"],
+    description:
+      "A local-first dashboard monitoring six hazards (cyclone, earthquake, flood, wildfire, landslide and tsunami) using USGS, GDACS and Open-Meteo data, with a Leaflet map and a FastAPI backend.",
+    tags: ["Python", "FastAPI", "Leaflet", "REST API"],
+    github: "",
+  },
+  {
+    name: "DocuMind AI",
+    aliases: ["documind", "docu mind", "code review", "reviewer"],
     description:
       "An AI-powered code review assistant using retrieval-augmented generation and local language models.",
     tags: ["Python", "RAG", "FAISS", "Qwen"],
     github: "https://github.com/akarshpv2005-ship-it/DOCUMIND-AI",
   },
   {
-    name: "Emotion-Based Movie Recommendation System",
+    name: "SolarPredict AI",
+    aliases: ["solar"],
     description:
-      "A movie recommendation application that uses facial emotion recognition to suggest movies based on detected emotions.",
-    tags: ["Django", "OpenCV", "TensorFlow"],
-    github: "",
+      "A solar power prediction application using an XGBoost machine learning model with a Flask-based web interface.",
+    tags: ["Python", "XGBoost", "Flask"],
+    github: "https://github.com/akarshpv2005-ship-it/Solar-energy-Prediction",
   },
   {
     name: "WeatherFit",
+    aliases: ["weather", "outfit"],
     description:
-      "A weather-based outfit recommendation website that suggests suitable clothing based on weather conditions.",
+      "A weather-based outfit recommendation website that suggests suitable clothing based on current weather conditions.",
     tags: ["Python", "Flask", "Weather API"],
     github: "",
   },
@@ -69,12 +75,14 @@ const suggestions = [
 ];
 
 const skillSummary =
-  "Akarsh's skills include Python, JavaScript, SQL, React, Flask, REST APIs, Machine Learning, Deep Learning, XGBoost, Computer Vision, OpenCV, RAG, NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, FAISS, Supabase, Git and GitHub.";
+  "Akarsh works in four areas.\n\nApplied AI: RAG, LLMs, NLP, Vector Databases, Semantic Search, FAISS.\nML & Vision: Machine Learning, Deep Learning, Computer Vision, OpenCV, TensorFlow, Keras, Scikit-learn, XGBoost.\nBackend & Full-stack: Python, FastAPI, Flask, Django, REST APIs, React, JavaScript, Socket.IO, JWT.\nData: SQL, PostgreSQL, Supabase, SQLAlchemy, Pandas, NumPy, Matplotlib, Seaborn, Git & GitHub.";
 
 function getAnswer(question) {
   const query = question.toLowerCase();
-  const project = projects.find((item) =>
-    query.includes(item.name.toLowerCase()),
+  const project = projects.find(
+    (item) =>
+      query.includes(item.name.toLowerCase()) ||
+      item.aliases.some((alias) => query.includes(alias)),
   );
 
   if (project) {
@@ -100,45 +108,39 @@ function getAnswer(question) {
     return `Akarsh's LinkedIn: ${profile.linkedin}`;
   }
 
+  if (/resume|cv\b/.test(query)) {
+    return "You can download Akarsh's resume using the Download Resume button at the top of this page.";
+  }
+
+  if (/hire|available|opportunit|job|work with|open to/.test(query)) {
+    return `Yes, Akarsh is open to AI/ML opportunities. You can reach him at ${profile.email} or on LinkedIn at ${profile.linkedin}.`;
+  }
+
   if (/contact|email|reach|connect/.test(query)) {
     return `You can email Akarsh at ${profile.email}, connect on LinkedIn at ${profile.linkedin}, or find his projects on GitHub at ${profile.github}.`;
   }
 
-  if (/where|location|from/.test(query)) {
-    return "Akarsh is based in Kerala, India.";
+  if (/education|study|degree|college|university|training|linnk|course/.test(query)) {
+    return "Akarsh holds a B.Sc. in Information Technology from MG University (2023 to 2026) and is currently pursuing the AI/ML Engineering Program at Linnk Academy India.";
   }
 
-  if (/who|about akarsh|tell me about|background|education/.test(query)) {
-    return "Akarsh P V is an AI/ML Engineering student from Kerala, India, and an aspiring AI/ML Engineer. He enjoys building intelligent applications and solving real-world problems. His interests include Machine Learning, Computer Vision, Generative AI, RAG and Full-Stack Development. He is pursuing a B.Sc. in Information Technology at MG University.";
+  if (/who|about akarsh|tell me about|background/.test(query)) {
+    return "Akarsh P V is an AI/ML Engineer in the making from Kochi, Kerala. He is a B.Sc. Information Technology graduate from MG University, currently training in AI and Machine Learning Engineering at Linnk Academy India. He builds practical projects in Computer Vision, Retrieval-Augmented Generation and API-driven applications.";
+  }
+
+  if (/where|location|based|kochi|kerala/.test(query)) {
+    return "Akarsh is based in Kochi, Kerala, India.";
   }
 
   if (/recommend|suggest|interested|which project/.test(query)) {
-    if (/disaster|hazard|climate|geospatial/.test(query)) {
-      return "DisasterGuard AI sounds like the closest match: it monitors six major hazards using public data sources and geospatial intelligence.";
-    }
-    if (/solar|energy|prediction|analytics/.test(query)) {
-      return "Take a look at SolarPredict AI, a solar power prediction app built with an XGBoost model and Flask.";
-    }
-    if (/code|review|developer|rag|retrieval|language model/.test(query)) {
-      return "Code Auto Reviewer may be a good fit. It uses retrieval-augmented generation and local language models to assist with code reviews.";
-    }
-    if (/movie|film|emotion|face|vision/.test(query)) {
-      return "Emotion-Based Movie Recommendation System combines facial emotion recognition with movie recommendations.";
-    }
-    if (/weather|outfit|clothing/.test(query)) {
-      return "WeatherFit recommends suitable clothing based on current weather conditions.";
-    }
-    if (/crm|customer|workflow|team/.test(query)) {
-      return "NEXUS CRM is a customer relationship management platform featuring ticket management, messaging and team workflows.";
-    }
-    return "For AI and geospatial monitoring, explore DisasterGuard AI; for predictive analytics, SolarPredict AI; for generative AI, Code Auto Reviewer; and for full-stack workflows, NEXUS CRM. Tell me what you are interested in and I can narrow it down.";
+    return "For computer vision, see the Emotion-Based Movie Recommendation app; for AI monitoring, DisasterGuard AI; for generative AI and RAG, DocuMind AI; for full-stack work, NEXUS CRM; and for predictive analytics, SolarPredict AI. Tell me what you are interested in and I can narrow it down.";
   }
 
   if (/^(hi|hello|hey)\b/.test(query)) {
     return "Hey! I can tell you about Akarsh's background, skills, projects and how to get in touch. What would you like to know?";
   }
 
-  return "I can help with Akarsh's background, technical skills, projects and contact links. Try asking about a project by name, or choose one of the suggested questions.";
+  return "I can help with Akarsh's background, education, technical skills, projects and contact links. Try asking about a project by name, or choose one of the suggested questions.";
 }
 
 function renderMessage(text) {
@@ -161,7 +163,7 @@ function Chatbot() {
     {
       id: "welcome",
       sender: "assistant",
-      text: "Hey! I'm Akarsh's AI assistant. Ask me anything about his skills, projects, and background!",
+      text: "Hey! I'm Akarsh's AI assistant. Ask me about his AI/ML skills, projects, education and how to reach him.",
     },
   ]);
   const messagesEndRef = useRef(null);

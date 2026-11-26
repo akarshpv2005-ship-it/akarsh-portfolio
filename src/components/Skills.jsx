@@ -1,44 +1,75 @@
-
 import { motion } from "framer-motion";
-import {
-  Brain, Code2, Database, Globe, Wrench
-} from "lucide-react";
+import { Brain, Eye, Server, Database, ArrowUpRight } from "lucide-react";
 
 const skillGroups = [
   {
-    title: "AI & Machine Learning",
+    num: "01",
+    title: "Applied AI",
     icon: Brain,
-    skills: ["Machine Learning", "Deep Learning", "XGBoost", "Computer Vision", "RAG", "OpenCV"]
+    desc: "LLM apps that search, read and answer from real documents.",
+    skills: ["RAG", "LLMs", "NLP", "Vector Databases", "Semantic Search", "FAISS"],
   },
   {
-    title: "Programming",
-    icon: Code2,
-    skills: ["Python", "JavaScript", "SQL", "HTML", "CSS"]
+    num: "02",
+    title: "Machine Learning & Vision",
+    icon: Eye,
+    desc: "Models that learn from data and understand images.",
+    skills: [
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "OpenCV",
+      "TensorFlow",
+      "Keras",
+      "Scikit-learn",
+      "XGBoost",
+    ],
   },
   {
-    title: "Data Science",
+    num: "03",
+    title: "Backend & Full-stack",
+    icon: Server,
+    desc: "APIs and interfaces that put models in front of users.",
+    skills: [
+      "Python",
+      "FastAPI",
+      "Flask",
+      "Django",
+      "REST API",
+      "React",
+      "JavaScript",
+      "Socket.IO",
+      "JWT",
+    ],
+  },
+  {
+    num: "04",
+    title: "Data & Delivery",
     icon: Database,
-    skills: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn"]
+    desc: "Clean data in, reliable systems out.",
+    skills: [
+      "SQL",
+      "PostgreSQL",
+      "Supabase",
+      "SQLAlchemy",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Git & GitHub",
+    ],
   },
-  {
-    title: "Web Development",
-    icon: Globe,
-    skills: ["React", "Flask", "REST API", "Socket.IO", "Tailwind CSS"]
-  },
-  {
-    title: "Tools & Technologies",
-    icon: Wrench,
-    skills: ["Git", "GitHub", "VS Code", "Google Colab", "FAISS", "Supabase"]
-  }
 ];
 
 function Skills() {
   return (
     <section className="skills section" id="skills">
       <div className="section-heading">
-        <span>MY TECHNICAL EXPERTISE</span>
-        <h2>Skills & <span>Technologies</span></h2>
-        <p>Technologies and tools I use to build intelligent applications.</p>
+        <span>02 / EXPERTISE</span>
+        <h2>
+          Tools I build <span>AI systems with.</span>
+        </h2>
+        <p>The stack behind my projects, grouped by what it does.</p>
       </div>
 
       <div className="skills-grid">
@@ -54,11 +85,18 @@ function Skills() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="skill-icon">
-                <Icon size={28} />
+              <div className="skill-head">
+                <div className="skill-icon">
+                  <Icon size={28} />
+                </div>
+                <div className="skill-corner">
+                  <span className="skill-num">{group.num}</span>
+                  <ArrowUpRight size={18} />
+                </div>
               </div>
 
               <h3>{group.title}</h3>
+              <p className="skill-desc">{group.desc}</p>
 
               <div className="skill-tags">
                 {group.skills.map((skill) => (

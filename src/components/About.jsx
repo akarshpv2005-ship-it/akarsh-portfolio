@@ -1,19 +1,18 @@
-
 import { motion } from "framer-motion";
-import { Code2, Brain, Laptop, GraduationCap } from "lucide-react";
+import { Brain, Code2, Eye, GraduationCap } from "lucide-react";
 
 function About() {
   return (
     <section className="about section" id="about">
-
       <div className="section-heading">
-        <span>GET TO KNOW ME</span>
-        <h2>About <span>Me</span></h2>
-        <p>A little introduction about my journey in technology.</p>
+        <span>01 / ABOUT</span>
+        <h2>
+          Practical AI, <span>built with purpose.</span>
+        </h2>
+        <p>Who I am, what I build and what I'm working on right now.</p>
       </div>
 
       <div className="about-container">
-
         <motion.div
           className="about-card"
           initial={{ opacity: 0, x: -40 }}
@@ -25,24 +24,25 @@ function About() {
             <Brain size={38} />
           </div>
 
-          <h3>AI & ML Enthusiast</h3>
+          <h3>AI / ML Engineer in the making</h3>
 
           <p>
-            I am an aspiring AI/ML Engineer passionate about
-            building intelligent applications and solving
-            real-world problems using technology.
+            I'm a B.Sc. Information Technology graduate currently training in
+            AI and Machine Learning Engineering. I build practical projects
+            around Computer Vision, Retrieval-Augmented Generation and
+            API-driven applications.
           </p>
 
           <p>
-            My interests include Machine Learning, Computer
-            Vision, Generative AI, Retrieval-Augmented Generation
-            and Full-Stack Development.
+            My work usually starts with a real problem: monitoring natural
+            hazards, searching across documents, or recommending movies based
+            on how someone feels. I turn these into working systems using
+            Python, FastAPI and modern ML tooling.
           </p>
 
           <p>
-            I enjoy transforming innovative ideas into
-            practical applications through continuous learning,
-            experimentation and development.
+            I'm looking for an opportunity where I can keep learning while
+            contributing to AI products that people actually use.
           </p>
         </motion.div>
 
@@ -53,39 +53,48 @@ function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
+          <span
+            style={{
+              color: "#c8b8ec",
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: 3,
+            }}
+          >
+            RIGHT NOW
+          </span>
 
           <div className="detail-card">
-            <Code2 />
+            <GraduationCap />
             <div>
-              <h4>Development</h4>
-              <p>Python, React, Flask and JavaScript</p>
+              <h4>Training</h4>
+              <p>AI/ML Engineering Program at Linnk Academy India</p>
             </div>
           </div>
 
           <div className="detail-card">
             <Brain />
             <div>
-              <h4>Artificial Intelligence</h4>
-              <p>Machine Learning, Computer Vision and RAG</p>
+              <h4>Building</h4>
+              <p>RAG chatbots and multi-hazard monitoring systems</p>
             </div>
           </div>
 
           <div className="detail-card">
-            <Laptop />
+            <Eye />
             <div>
-              <h4>Interests</h4>
-              <p>AI Applications and Intelligent Systems</p>
+              <h4>Exploring</h4>
+              <p>Computer Vision, Deep Learning and semantic search</p>
             </div>
           </div>
 
           <div className="detail-card">
-            <GraduationCap />
+            <Code2 />
             <div>
-              <h4>Education</h4>
-              <p>B.Sc. Information Technology – MG University</p>
+              <h4>Tools</h4>
+              <p>Python, FastAPI, Flask, OpenCV, TensorFlow and React</p>
             </div>
           </div>
-
         </motion.div>
       </div>
     </section>

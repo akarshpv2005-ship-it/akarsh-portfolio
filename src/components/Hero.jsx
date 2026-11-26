@@ -1,46 +1,32 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, BriefcaseBusiness, CodeXml } from "lucide-react";
+import NeuralGlobe from "./NeuralGlobe";
+
+const TITLE = "AI / ML ENGINEER";
 
 function Hero() {
-  const words = ["AI / ML ENGINEER", "WEB DEVELOPER", "DATA SCIENTIST", "PYTHON DEVELOPER"];
   const [text, setText] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentWord = words[wordIndex];
-    let speed = isDeleting ? 50 : 100;
+    if (text.length === TITLE.length) return;
 
     const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setText(currentWord.substring(0, text.length + 1));
-        if (text.length + 1 === currentWord.length) {
-          setTimeout(() => setIsDeleting(true), 1500);
-        }
-      } else {
-        setText(currentWord.substring(0, text.length - 1));
-        if (text.length === 0) {
-          setIsDeleting(false);
-          setWordIndex((prev) => (prev + 1) % words.length);
-        }
-      }
-    }, speed);
+      setText(TITLE.substring(0, text.length + 1));
+    }, 100);
+
     return () => clearTimeout(timer);
-  }, [text, isDeleting, wordIndex]);
+  }, [text]);
 
   return (
     <section className="hero" id="home">
-
       <motion.div
         className="hero-content"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <span className="hero-tag">
-          AVAILABLE FOR OPPORTUNITIES
-        </span>
+        <span className="hero-tag">AVAILABLE FOR OPPORTUNITIES</span>
 
         <p className="hero-intro">HELLO, I'M</p>
 
@@ -49,14 +35,16 @@ function Hero() {
         </h1>
 
         <h2>
-          {text}<span className="typing-cursor">|</span>
+          {text}
+          <span className="typing-cursor">|</span>
         </h2>
 
         <p className="hero-description">
-          Building intelligent applications through
-          Machine Learning, Computer Vision and
-          Generative AI. Turning innovative ideas
-          into real-world solutions.
+          B.Sc. IT graduate from <strong>Kochi</strong>, training in{" "}
+          <strong>AI & Machine Learning Engineering</strong>. I build{" "}
+          <strong>Computer Vision</strong> and <strong>RAG</strong> projects
+          like DocuLens and DisasterGuard AI,Emotion Based Movie recommender,and deploy them as <strong>API-driven</strong> web apps with{" "}
+          working software.
         </p>
 
         <div className="hero-buttons">
@@ -67,6 +55,7 @@ function Hero() {
           <a href="#contact" className="secondary-btn">
             Contact Me
           </a>
+
           <a
             href="/resume/Akarsh_PV_Resume.pdf"
             download
@@ -98,16 +87,8 @@ function Hero() {
 
       <div className="hero-visual">
         <div className="glow-circle"></div>
-        <div className="hero-orbit">
-          <span>AI</span>
-          <span>ML</span>
-          <span>CV</span>
-        </div>
-        <div className="hero-center">
-          <span>AK</span>
-        </div>
+        <NeuralGlobe />
       </div>
-
     </section>
   );
 }

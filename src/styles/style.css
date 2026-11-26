@@ -1839,3 +1839,400 @@ body {
     transform: none !important;
   }
 }
+/* =================================
+   3D UPGRADE (append at end of file)
+================================= */
+
+/* ---- Tilt3D wrapper (used for project cards, other cards later) ---- */
+.tilt-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* The wrapper handles tilt, so stop the card from tilting itself */
+.tilt-3d .project-card,
+.tilt-3d .project-card:hover,
+.tilt-3d .project-card:focus-within {
+  transform: none !important;
+}
+
+.tilt-3d:hover .project-card,
+.tilt-3d:focus-within .project-card {
+  border-color: rgba(222, 209, 250, 0.62);
+  box-shadow:
+    0 34px 80px rgba(0, 0, 0, 0.48),
+    0 0 46px rgba(156, 123, 209, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Moving light reflection that follows the mouse */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 17px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(235, 224, 255, 0.16),
+    transparent 55%
+  );
+  transition: opacity 300ms ease;
+}
+
+.tilt-3d:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* ---- Hero particle canvas ---- */
+.hero > .hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---- 3D buttons: soft bottom edge for physical depth ---- */
+.primary-btn {
+  transform-style: preserve-3d;
+  box-shadow:
+    0 10px 30px rgba(125, 99, 168, 0.3),
+    0 3px 0 rgba(104, 78, 150, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.primary-btn:active,
+.secondary-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 4px 12px rgba(125, 99, 168, 0.25);
+}
+
+.secondary-btn {
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ---- Navbar depth ---- */
+.navbar {
+  box-shadow:
+    0 14px 44px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(222, 209, 250, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ---- Mobile / touch: keep it subtle and fast ---- */
+@media (max-width: 700px), (hover: none) {
+  .tilt-3d {
+    transform: none !important;
+  }
+
+  .tilt-glare {
+    display: none;
+  }
+
+  .hero > .hero-bg-canvas {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tilt-3d {
+    transform: none !important;
+  }
+
+  .hero > .hero-bg-canvas {
+    display: none;
+  }
+}
+/* =================================
+   3D BACKGROUND SHOW-THROUGH
+================================= */
+
+body {
+  background: transparent !important;
+}
+
+/* Hero: fully transparent so the 3D scene is visible */
+.hero {
+  background: transparent !important;
+}
+
+/* Other sections: light dark tint so text stays readable */
+.about,
+.skills,
+.projects,
+.education,
+.contact {
+  background: rgba(10, 9, 20, 0.45) !important;
+}
+
+/* Old CSS bubble dots are not needed now, the 3D scene replaces them */
+.hero::before,
+.section::before {
+  opacity: 0.08;
+}
+/* =================================
+   THEME: CYBER CYAN
+================================= */
+
+:root {
+  --portfolio-bg: #050b12;
+  --portfolio-lavender: #67e8f9;
+  --portfolio-lavender-bright: #cffafe;
+  --portfolio-purple: #06b6d4;
+  --glass-edge: rgba(103, 232, 249, 0.22);
+}
+
+.about, .skills, .projects, .education, .contact {
+  background: rgba(4, 12, 20, 0.5) !important;
+}
+
+/* Tags and small badges */
+.hero-tag,
+.section-heading > span {
+  background: linear-gradient(135deg, rgba(34,211,238,0.16), rgba(103,232,249,0.04));
+  border-color: rgba(103,232,249,0.38);
+  box-shadow: 0 8px 24px rgba(8,145,178,0.15), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.hero h1 span {
+  text-shadow: 0 0 36px rgba(34,211,238,0.4);
+}
+
+/* Buttons */
+.primary-btn,
+.contact-form button {
+  background: linear-gradient(115deg, #cffafe 0%, #22d3ee 100%);
+  color: #04141a;
+  border-color: rgba(207,250,254,0.6);
+  box-shadow:
+    0 10px 30px rgba(34,211,238,0.3),
+    0 3px 0 rgba(8,145,178,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.primary-btn:hover,
+.contact-form button:hover {
+  box-shadow:
+    0 17px 38px rgba(34,211,238,0.42),
+    0 3px 0 rgba(8,145,178,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.secondary-btn {
+  border-color: rgba(103,232,249,0.28);
+}
+
+.secondary-btn:hover {
+  border-color: rgba(103,232,249,0.75);
+  background: rgba(34,211,238,0.12);
+  box-shadow: 0 8px 24px rgba(8,145,178,0.2);
+}
+
+/* Hero visual */
+.glow-circle {
+  background: #06b6d4;
+}
+
+.hero-orbit {
+  border-color: rgba(103,232,249,0.4);
+  box-shadow: 0 0 52px rgba(34,211,238,0.12), inset 0 0 42px rgba(103,232,249,0.04);
+}
+
+.hero-orbit span {
+  background: rgba(8,24,34,0.85);
+  border-color: rgba(103,232,249,0.4);
+}
+
+.hero-center {
+  background: linear-gradient(145deg, rgba(14,60,78,0.96), rgba(6,16,24,0.98));
+  border-color: rgba(103,232,249,0.65);
+  box-shadow: 0 0 96px rgba(34,211,238,0.3), 0 24px 54px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* Cards */
+.about-card,
+.skill-card,
+.project-card,
+.education-card {
+  background: linear-gradient(145deg, rgba(14,34,48,0.82), rgba(7,16,24,0.82));
+  border-color: rgba(103,232,249,0.2);
+}
+
+.detail-card {
+  background: linear-gradient(110deg, rgba(14,34,48,0.85), rgba(7,16,24,0.82));
+  border-color: rgba(103,232,249,0.18);
+}
+
+.about-card:hover,
+.skill-card:hover,
+.education-card:hover,
+.detail-card:hover,
+.tilt-3d:hover .project-card,
+.tilt-3d:focus-within .project-card {
+  border-color: rgba(103,232,249,0.6);
+  box-shadow:
+    0 28px 68px rgba(0,0,0,0.45),
+    0 0 42px rgba(34,211,238,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+/* Icons */
+.about-icon,
+.skill-icon,
+.education-icon,
+.project-icon.purple,
+.project-icon.orange,
+.project-icon.blue,
+.project-icon.pink,
+.contact-detail-icon {
+  background: linear-gradient(145deg, rgba(34,211,238,0.24), rgba(103,232,249,0.07));
+  border-color: rgba(103,232,249,0.3);
+  box-shadow: 0 10px 28px rgba(8,145,178,0.22), inset 0 1px 0 rgba(255,255,255,0.13);
+}
+
+.detail-card > svg {
+  color: #67e8f9;
+}
+
+/* Skill tags */
+.skill-tags span {
+  background: linear-gradient(145deg, rgba(34,211,238,0.16), rgba(103,232,249,0.05));
+  border-color: rgba(103,232,249,0.3);
+}
+
+.skill-tags span:hover {
+  background: rgba(34,211,238,0.26);
+  border-color: rgba(103,232,249,0.55);
+}
+
+/* Contact */
+.contact-container {
+  background: linear-gradient(135deg, rgba(12,32,46,0.8), rgba(5,12,19,0.85));
+  border-color: rgba(103,232,249,0.22);
+  box-shadow: 0 30px 88px rgba(0,0,0,0.45), 0 0 62px rgba(34,211,238,0.1), inset 0 1px 0 rgba(255,255,255,0.09);
+}
+
+.contact-form {
+  border-color: rgba(103,232,249,0.18);
+}
+
+.contact-form input,
+.contact-form textarea {
+  border-color: rgba(103,232,249,0.16);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(103,232,249,0.85);
+  box-shadow: 0 0 0 3px rgba(34,211,238,0.2);
+}
+
+.contact-socials a:hover {
+  background: #0e3a4c;
+  border-color: #67e8f9;
+  box-shadow: 0 10px 24px rgba(34,211,238,0.2);
+}
+
+.navbar,
+.portfolio-footer {
+  border-color: rgba(103,232,249,0.18);
+}    
+/* SKILLS: numbered capability cards */
+.skill-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.skill-head .skill-icon {
+  margin-bottom: 0;
+}
+
+.skill-corner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--portfolio-lavender);
+}
+
+.skill-num {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.skill-card h3 {
+  margin-bottom: 10px;
+}
+
+.skill-desc {
+  color: #a5a3ad;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+/* HERO INTRO: small, bold, highlighted */
+.hero .hero-description {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.85;
+  max-width: 520px;
+  color: #b9c8cf;
+  padding-left: 16px;
+  border-left: 2px solid rgba(103, 232, 249, 0.6);
+}
+
+.hero .hero-description strong {
+  color: #67e8f9;
+  font-weight: 800;
+  text-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
+}
+/* PROJECTS: numbered cards */
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-meta .project-category {
+  margin-bottom: 0;
+}
+
+.project-num {
+  color: var(--portfolio-lavender);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  opacity: 0.8;
+}
+/* PROJECTS: numbered cards */
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.project-meta .project-category {
+  margin-bottom: 0;
+}
+
+.project-num {
+  color: var(--portfolio-lavender);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  opacity: 0.8;
+}

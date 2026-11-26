@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -7,84 +6,93 @@ import {
   Sun,
   Code,
   Film,
-  Cloud
+  Cloud,
 } from "lucide-react";
 
 const projects = [
   {
-    title: "DisasterGuard AI",
-    category: "AI / MACHINE LEARNING",
-    description: "An intelligent disaster monitoring platform designed to track six major hazards using public data sources and geospatial intelligence.",
-    tags: ["Python", "Machine Learning", "Geospatial"],
-    icon: Shield,
-    color: "purple",
-    image: "/images/disasterguard-ai.png",
-    github: ""
-  },
-  {
-    title: "SolarPredict AI",
-    category: "PREDICTIVE ANALYTICS",
-    description: "A solar power prediction application using an XGBoost machine learning model with a Flask-based web interface.",
-    tags: ["Python", "XGBoost", "Flask"],
-    icon: Sun,
-    color: "orange",
-    image: "/images/solarpredict-ai.png",
-    github: ""
-  },
-  {
     title: "NEXUS CRM",
-    category: "FULL STACK DEVELOPMENT",
-    description: "A customer relationship management platform with ticket management, messaging and team workflows.",
+    category: "FULL-STACK APPLICATION",
+    description:
+      "A customer relationship management platform with ticket management, messaging and team workflows.",
     tags: ["React", "Flask", "Supabase"],
     icon: Code,
     color: "blue",
     image: "/images/nexus-crm.png",
-    github: "https://github.com/akarshpv2005-ship-it/NEXUS-CRM"
+    github: "https://github.com/akarshpv2005-ship-it/NEXUS-CRM",
   },
   {
-    title: "Code Auto Reviewer",
+    title: "Emotion-Based Movie Recommendation",
+    category: "COMPUTER VISION / DEEP LEARNING",
+    description:
+      "Django web app with real-time facial emotion detection that maps seven emotions to movie categories, with user authentication and an admin dashboard.",
+    tags: ["Django", "OpenCV", "TensorFlow", "Keras"],
+    icon: Film,
+    color: "pink",
+    image: "/images/emotion-movie.png",
+    github: "https://github.com/akarshpv2005-ship-it/FLICK-PICKS",
+  },
+  {
+    title: "DisasterGuard AI",
+    category: "AI / GEOSPATIAL MONITORING",
+    description:
+      "Local-first dashboard monitoring six hazards (cyclone, earthquake, flood, wildfire, landslide and tsunami) using USGS, GDACS and Open-Meteo data, with a Leaflet map and a FastAPI backend.",
+    tags: ["Python", "FastAPI", "Leaflet", "REST API"],
+    icon: Shield,
+    color: "purple",
+    image: "/images/disasterguard-ai.png",
+    github: "",
+  },
+  {
+    title: "DocuMind AI",
     category: "GENERATIVE AI / RAG",
-    description: "An AI-powered code review assistant using retrieval-augmented generation and local language models.",
+    description:
+      "An AI-powered code review assistant using retrieval-augmented generation and local language models.",
     tags: ["Python", "RAG", "FAISS", "Qwen"],
     icon: Brain,
     color: "purple",
     image: "/images/code-auto-reviewer.png",
-    github: "https://github.com/akarshpv2005-ship-it/DOCUMIND-AI"
+    github: "https://github.com/akarshpv2005-ship-it/DOCUMIND-AI",
   },
   {
-    title: "Emotion-Based Movie Recommendation",
-    category: "COMPUTER VISION",
-    description: "A movie recommendation application that uses facial emotion recognition to suggest movies based on detected emotions.",
-    tags: ["Django", "OpenCV", "TensorFlow"],
-    icon: Film,
-    color: "pink",
-    image: "/images/emotion-movie.png",
-    github: ""
+    title: "SolarPredict AI",
+    category: "PREDICTIVE ANALYTICS",
+    description:
+      "A solar power prediction application using an XGBoost machine learning model with a Flask-based web interface.",
+    tags: ["Python", "XGBoost", "Flask"],
+    icon: Sun,
+    color: "orange",
+    image: "/images/solarpredict-ai.png",
+    github: "https://github.com/akarshpv2005-ship-it/Solar-energy-Prediction",
   },
   {
     title: "WeatherFit",
-    category: "WEB APPLICATION",
-    description: "A weather-based outfit recommendation website that suggests suitable clothing based on weather conditions.",
+    category: "API-DRIVEN APPLICATION",
+    description:
+      "A weather-based outfit recommendation website that suggests suitable clothing based on current weather conditions.",
     tags: ["Python", "Flask", "Weather API"],
     icon: Cloud,
     color: "blue",
     image: "/images/weatherfit.png",
-    github: ""
-  }
+    github: "",
+  },
 ];
 
 function Projects() {
   return (
     <section className="projects section" id="projects">
       <div className="section-heading">
-        <span>MY RECENT WORK</span>
-        <h2>Featured <span>Projects</span></h2>
-        <p>Some of the applications and intelligent systems I have developed.</p>
+        <span>03 / PROJECTS</span>
+        <h2>
+          AI projects that <span>solve real problems.</span>
+        </h2>
+        <p>Selected applications and intelligent systems I have built.</p>
       </div>
 
       <div className="projects-grid">
         {projects.map((project, index) => {
           const Icon = project.icon;
+          const number = String(index + 1).padStart(2, "0");
 
           return (
             <motion.div
@@ -100,11 +108,16 @@ function Projects() {
                 alt={project.title}
                 className="project-image"
               />
+
               <div className={`project-icon ${project.color}`}>
                 <Icon size={30} />
               </div>
 
-              <span className="project-category">{project.category}</span>
+              <div className="project-meta">
+                <span className="project-category">{project.category}</span>
+                <span className="project-num">{number}</span>
+              </div>
+
               <h3>{project.title}</h3>
               <p>{project.description}</p>
 
@@ -121,12 +134,23 @@ function Projects() {
                   rel="noreferrer"
                   className="project-link"
                 >
-                  View Project <ArrowUpRight size={17} />
+                  View on GitHub <ArrowUpRight size={17} />
                 </a>
               )}
             </motion.div>
           );
         })}
+      </div>
+
+      <div style={{ textAlign: "center", marginTop: 45 }}>
+        <a
+          href="https://github.com/akarshpv2005-ship-it"
+          target="_blank"
+          rel="noreferrer"
+          className="secondary-btn"
+        >
+          Browse all on GitHub <ArrowUpRight size={18} />
+        </a>
       </div>
     </section>
   );
